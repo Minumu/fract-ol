@@ -18,6 +18,7 @@ typedef struct	s_fract
 	double 		move_x;
 	double		move_y;
 	double 		zoom;
+	int 		jul_shape;
 }				t_fract;
 
 typedef struct	s_limits
@@ -57,5 +58,6 @@ void	my_putpixel(t_all *all, int n, int i, int j);
 
 int		key_processing(int keycode, t_all *all);
 int 	mouse_processing(int button, int x, int y, t_all *all);
+int 	shape_julia(int x, int y, t_all *all);
 
 #endif

@@ -32,7 +32,6 @@ void	do_fractal(t_all *all)
 	}
 	mlx_put_image_to_window(all->draw->mlx, all->draw->win,
 							all->draw->img_w, 0, 0);
-
 }
 
 void	do_mandelbrot(t_all *all, int i, int j)
@@ -44,9 +43,9 @@ void	do_mandelbrot(t_all *all, int i, int j)
 //	all->fract->c_r = all->lim->xmin + i * all->fract->pixw + all->fract->zoom;
 //	all->fract->c_im = all->lim->ymin + j * all->fract->pixh + all->fract->zoom;
 	all->fract->c_r = 1.5 * (i - all->draw->w / 2) / (0.5 * all->draw->w *
-													  all->fract->zoom) - all->fract->move_x;
+			all->fract->zoom) - all->fract->move_x;
 	all->fract->c_im = (j - all->draw->h / 2) / (0.5 * all->draw->h *
-												 all->fract->zoom) - all->fract->move_y;
+			all->fract->zoom) - all->fract->move_y;
 	z_r = 0.0;
 	z_im = 0.0;
 	int n = 0;
@@ -66,10 +65,12 @@ void	do_julia(t_all *all, int i, int j)
 	double z_im;
 	double old_z;
 
-	all->fract->julc_im = -0.8;
-	all->fract->julc_r = 0;
-	z_r = all->lim->xmin + i * all->fract->pixw;
-	z_im = all->lim->ymin + j * all->fract->pixh;
+//	z_r = all->lim->xmin + i * all->fract->pixw;
+//	z_im = all->lim->ymin + j * all->fract->pixh;
+	z_r = 1.5 * (i - all->draw->w / 2) / (0.5 * all->draw->w *
+			all->fract->zoom) - all->fract->move_x;
+	z_im = (j - all->draw->h / 2) / (0.5 * all->draw->h *
+			all->fract->zoom) - all->fract->move_y;
 	int n = 0;
 	while (n < all->fract->depth && z_r * z_r + z_im * z_im < 4)
 	{
@@ -97,8 +98,9 @@ int 	main(int ac, char **av)
 								  &all->draw->size_l, &all->draw->en);
 	check_fractal(all, av);
 	do_fractal(all);
-	mlx_hook(all->draw->win, 2, 5, key_processing, all);
 	mlx_mouse_hook(all->draw->win, mouse_processing, all);
+	mlx_hook(all->draw->win, 2, 5, key_processing, all);
+	mlx_hook(all->draw->win, 6, 0, shape_julia, all);
 	mlx_loop(all->draw->mlx);
 	return (0);
 }

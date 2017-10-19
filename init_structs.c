@@ -5,14 +5,15 @@ t_fract			*init_fract(t_draw *draw, t_limits *lim)
 	t_fract *fract;
 
 	fract = malloc(sizeof(t_fract));
-	fract->depth = 500;
+	fract->depth = 50;
 	fract->c_im = 0.0;
 	fract->c_r = 0.0;
 	fract->julc_r = 0.0;
-	fract->julc_im = 0.0;
+	fract->julc_im = -0.8;
 	fract->zoom = 1;
 	fract->move_x = 0.0;
 	fract->move_y = 0.0;
+	fract->jul_shape = 0;
 	fract->pixw = (lim->xmax-lim->xmin)/draw->w;
 	fract->pixh = (lim->ymax-lim->ymin)/draw->h;
 	return (fract);
