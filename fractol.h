@@ -13,8 +13,6 @@ typedef struct	s_fract
 	double		c_r;
 	double		julc_im;
 	double		julc_r;
-	double		pixw;
-	double		pixh;
 	double 		move_x;
 	double		move_y;
 	double 		zoom;
@@ -35,6 +33,7 @@ typedef struct	s_draw
 	void		*win;
 	void		*img_w;
 	char		*img;
+	int 		error;
 	int 		fractal;
 	int			bpp;
 	int			size_l;
