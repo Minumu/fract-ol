@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-t_fract			*init_fract(t_draw *draw, t_limits *lim)
+t_fract			*init_fract(void)
 {
 	t_fract *fract;
 
@@ -14,8 +14,6 @@ t_fract			*init_fract(t_draw *draw, t_limits *lim)
 	fract->move_x = 0.0;
 	fract->move_y = 0.0;
 	fract->jul_shape = 0;
-//	fract->pixw = (lim->xmax-lim->xmin)/draw->w;
-//	fract->pixh = (lim->ymax-lim->ymin)/draw->h;
 	return (fract);
 }
 
@@ -30,21 +28,10 @@ t_draw			*init_draw(void)
 	draw->img = NULL;
 	draw->error = 0;
 	draw->fractal = 0;
-	draw->w = 700;
-	draw->h = 700;
+	draw->w = 800;
+	draw->h = 800;
+	draw->color = COLORFUL;
 	return (draw);
-}
-
-t_limits		*init_limits(void)
-{
-	t_limits *lim;
-
-	lim = malloc(sizeof(t_limits));
-	lim->xmax = 2.0;
-	lim->xmin = -2.0;
-	lim->ymax = 2.5;
-	lim->ymin = -2.5;
-	return (lim);
 }
 
 t_all			*init_all(void)
@@ -53,7 +40,6 @@ t_all			*init_all(void)
 
 	all = malloc(sizeof(t_all));
 	all->draw = init_draw();
-	all->lim = init_limits();
-	all->fract = init_fract(all->draw, all->lim);
+	all->fract = init_fract();
 	return (all);
 }

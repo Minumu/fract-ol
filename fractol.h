@@ -3,8 +3,14 @@
 # include <math.h>
 # include "libft/include/libft.h"
 # include "minilibx_macos/mlx.h"
-
+# include <pthread.h>
+#include <libc.h>
 # include <stdio.h> // DELETE ////////
+
+# define BLACK 0
+# define COLORFUL 1
+# define HEIGHT 800
+# define WIDTH 800
 
 typedef struct	s_fract
 {
@@ -19,14 +25,6 @@ typedef struct	s_fract
 	int 		jul_shape;
 }				t_fract;
 
-typedef struct	s_limits
-{
-	double		xmin;
-	double		xmax;
-	double		ymin;
-	double		ymax;
-}				t_limits;
-
 typedef struct	s_draw
 {
 	void		*mlx;
@@ -40,21 +38,26 @@ typedef struct	s_draw
 	int			en;
 	int			w;
 	int			h;
+
+	int 		color;
 }				t_draw;
 
 typedef struct	s_all
 {
 	t_draw		*draw;
-	t_limits	*lim;
 	t_fract		*fract;
 }				t_all;
 
 t_all			*init_all(void);
-void	do_fractal(t_all *all);
+void	do_fractal(t_all *all, int i, int j);
+void	do_fractal1(t_all *all);
+void	start_threads(t_all *all);
 void	do_julia(t_all *all, int i, int j);
 void	do_mandelbrot(t_all *all, int i, int j);
-void	my_putpixel(t_all *all, int n, int i, int j);
 
+void	do_burning_ship(t_all *all, int i, int j);
+void	my_putpixel(t_all *all, int n, int i, int j);
+void	my_putpixel_black(t_all *all, int n, int i, int j);
 int		key_processing(int keycode, t_all *all);
 int 	mouse_processing(int button, int x, int y, t_all *all);
 int 	shape_julia(int x, int y, t_all *all);
