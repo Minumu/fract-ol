@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror
 
 LIBFT = libft/
 
-LIBMLX = -lmlx -framework OpenGL -framework AppKit
+LIBMLX = minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 
 OBJECTS = fractals.o init_structs.o key_processing.o main.o putpixel_black.o putpixel_colorful.o threads.o threads_functions.o
 
