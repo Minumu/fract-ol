@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_processing.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tshevchu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/24 16:22:04 by tshevchu          #+#    #+#             */
+/*   Updated: 2017/10/24 16:22:27 by tshevchu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int 	shape_julia(int x, int y, t_all *all)
+int		shape_julia(int x, int y, t_all *all)
 {
 	if (all->fract->jul_shape == 1)
 	{
@@ -11,7 +23,7 @@ int 	shape_julia(int x, int y, t_all *all)
 	return (0);
 }
 
-int 	mouse_processing(int button, int x, int y, t_all *all)
+int		mouse_processing(int button, int x, int y, t_all *all)
 {
 	if (button == 4)
 	{
@@ -33,12 +45,30 @@ int 	mouse_processing(int button, int x, int y, t_all *all)
 	return (0);
 }
 
+int		key_processing_addition(int keycode, t_all *all)
+{
+	if (keycode == 126)
+		all->fract->move_y -= 0.1;
+	else if (keycode == 125)
+		all->fract->move_y += 0.1;
+	else if (keycode == 123)
+		all->fract->move_x -= 0.1;
+	else if (keycode == 124)
+		all->fract->move_x += 0.1;
+	else if (keycode == 24)
+		all->fract->depth += 10;
+	else if (keycode == 27)
+		all->fract->depth -= 10;
+	start_threads(all);
+	return (0);
+}
+
 int		key_processing(int keycode, t_all *all)
 {
-	printf("%d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(all->draw->mlx, all->draw->win);
+		clean_all(all);
 		exit(0);
 	}
 	else if (keycode == 49)
@@ -55,35 +85,7 @@ int		key_processing(int keycode, t_all *all)
 		all->draw->color = COLORFUL;
 		start_threads(all);
 	}
-	else if (keycode == 126)
-	{
-		all->fract->move_y -= 0.1;
-		start_threads(all);
-	}
-	else if (keycode == 125)
-	{
-		all->fract->move_y += 0.1;
-		start_threads(all);
-	}
-	else if (keycode == 123)
-	{
-		all->fract->move_x -= 0.1;
-		start_threads(all);
-	}
-	else if (keycode == 124)
-	{
-		all->fract->move_x += 0.1;
-		start_threads(all);
-	}
-	else if (keycode == 24)
-	{
-		all->fract->depth += 10;
-		start_threads(all);
-	}
-	else if (keycode == 27)
-	{
-		all->fract->depth -= 10;
-		start_threads(all);
-	}
+	else
+		key_processing_addition(keycode, all);
 	return (0);
 }
